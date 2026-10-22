@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeeshan Younas | AI Engineer & LLM Expert</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- PREMIUM VARIABLES & THEMES --- */
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #F3E5AB;
+            --gold-dark: #AA8C2C;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        [data-theme="dark"] {
+            --bg-primary: #050505;
+            --bg-secondary: #0a0a0a;
+            --card-bg: rgba(20, 20, 20, 0.7);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --border-color: rgba(212, 175, 55, 0.3);
+        }
+        [data-theme="light"] {
+            --bg-primary: #F8F9FA;
+            --bg-secondary: #FFFFFF;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --text-primary: #111111;
+            --text-secondary: #555555;
+            --border-color: rgba(170, 140, 44, 0.4);
+        }
+
+        /* --- GLOBAL STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: var(--transition);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        h1, h2, h3 { font-family: 'Cinzel', serif; letter-spacing: 1px; }
+        a { text-decoration: none; color: inherit; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .gold-text { background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; position: relative; display: inline-block; left: 50%; transform: translateX(-50%); }
+        .section-title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 50px; height: 3px; background: var(--gold); border-radius: 2px; }
+
+        /* --- ANIMATED BACKGROUND --- */
+        .bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
+        .bg-glow::before, .bg-glow::after { content: ''; position: absolute; width: 300px; height: 300px; border-radius: 50%; background: var(--gold); opacity: 0.05; filter: blur(100px); animation: float 15s infinite ease-in-out; }
+        .bg-glow::before { top: 10%; left: 10%; }
+        .bg-glow::after { bottom: 10%; right: 10%; animation-delay: -7s; }
+        @keyframes float { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(50px, 50px); } }
+
+        /* --- HEADER & NAV --- */
+        header { position: fixed; top: 0; width: 100%; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(15px); z-index: 1000; border-bottom: 1px solid var(--border-color); }
+        [data-theme="light"] header { background: rgba(255, 255, 255, 0.8); }
+        .logo { font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 700; }
+        nav ul { display: flex; gap: 30px; list-style: none; }
+        nav a { font-weight: 400; position: relative; transition: var(--transition); }
+        nav a:hover { color: var(--gold); }
+        nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--gold); transition: var(--transition); }
+        nav a:hover::after { width: 100%; }
+        .controls { display: flex; gap: 15px; align-items: center; }
+        .controls select, .controls button { background: transparent; border: 1px solid var(--gold); color: var(--text-primary); padding: 8px 12px; border-radius: 20px; cursor: pointer; transition: var(--transition); font-size: 0.9rem; }
+        .controls select:hover, .controls button:hover { background: var(--gold); color: #000; }
+
+        /* --- HERO SECTION --- */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: 80px; }
+        .hero-content h1 { font-size: 4rem; margin-bottom: 20px; line-height: 1.2; }
+        .hero-content .subtitle { font-size: 1.5rem; color: var(--text-secondary); margin-bottom: 10px; min-height: 40px; }
+        .hero-content .typing-text { color: var(--gold); font-weight: 600; border-right: 2px solid var(--gold); padding-right: 5px; animation: blink 0.7s infinite; }
+        @keyframes blink { 50% { border-color: transparent; } }
+        .hero-btns { margin-top: 40px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .btn { padding: 12px 30px; border-radius: 30px; font-weight: 600; transition: var(--transition); border: 2px solid var(--gold); cursor: pointer; }
+        .btn-primary { background: var(--gold); color: #000; }
+        .btn-primary:hover { background: transparent; color: var(--gold); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); }
+        .btn-secondary { background: transparent; color: var(--gold); }
+        .btn-secondary:hover { background: var(--gold); color: #000; transform: translateY(-3px); }
+
+        /* --- SECTIONS & CARDS --- */
+        section { padding: 100px 5%; }
+        .glass-card { background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-radius: 15px; padding: 30px; transition: var(--transition); }
+        .glass-card:hover { transform: translateY(-10px); border-color: var(--gold); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.15); }
+        
+        /* --- ABOUT --- */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .about-text p { color: var(--text-secondary); margin-bottom: 20px; font-size: 1.1rem; }
+        .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+        .stat-box { text-align: center; padding: 20px; border: 1px solid var(--border-color); border-radius: 10px; }
+        .stat-box h3 { font-size: 2.5rem; color: var(--gold); margin-bottom: 5px; }
+
+        /* --- EXPERIENCE TIMELINE --- */
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline::after { content: ''; position: absolute; width: 2px; background: var(--gold); top: 0; bottom: 0; left: 50%; margin-left: -1px; }
+        .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
+        .timeline-item::after { content: ''; position: absolute; width: 15px; height: 15px; right: -8px; background: var(--bg-primary); border: 2px solid var(--gold); top: 15px; border-radius: 50%; z-index: 1; }
+        .left { left: 0; }
+        .right { left: 50%; }
+        .right::after { left: -8px; }
+        .timeline-content { padding: 20px; }
+        .timeline-content h3 { color: var(--gold); font-size: 1.2rem; margin-bottom: 5px; }
+        .timeline-content .date { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 10px; display: block; }
+
+        /* --- SKILLS & PROJECTS GRID --- */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .skill-category h3 { color: var(--gold); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+        .tag { background: rgba(212, 175, 55, 0.1); border: 1px solid var(--gold); color: var(--gold); padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; }
+        .project-card { display: flex; flex-direction: column; gap: 15px; }
+        .project-card h3 { color: var(--gold); }
+        .project-tech { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+
+        /* --- CHATBOT --- */
+        .chat-toggle { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #000; cursor: pointer; box-shadow: 0 5px 20px rgba(212, 175, 55, 0.5); z-index: 2000; transition: var(--transition); }
+        .chat-toggle:hover { transform: scale(1.1) rotate(10deg); }
+        .chat-box { position: fixed; bottom: 100px; right: 30px; width: 350px; height: 500px; background: var(--bg-secondary); border: 1px solid var(--gold); border-radius: 20px; display: none; flex-direction: column; z-index: 2000; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .chat-header { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: #000; padding: 15px 20px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        .chat-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .msg { padding: 12px 18px; border-radius: 18px; max-width: 80%; font-size: 0.9rem; line-height: 1.4; }
+        .bot { background: var(--card-bg); border: 1px solid var(--border-color); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .user { background: var(--gold); color: #000; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .chat-footer { padding: 15px; border-top: 1px solid var(--border-color); display: flex; gap: 10px; }
+        .chat-footer input { flex: 1; background: transparent; border: 1px solid var(--border-color); padding: 10px 15px; border-radius: 20px; color: var(--text-primary); outline: none; }
+        .chat-footer input:focus { border-color: var(--gold); }
+        .chat-footer button { background: var(--gold); border: none; width: 40px; height: 40px; border-radius: 50%; color: #000; cursor: pointer; font-size: 1.2rem; }
+
+        /* --- FOOTER --- */
+        footer { text-align: center; padding: 40px; border-top: 1px solid var(--border-color); color: var(--text-secondary); }
+        .social-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; }
+        .social-links a { width: 40px; height: 40px; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); transition: var(--transition); }
+        .social-links a:hover { background: var(--gold); color: #000; transform: translateY(-5px); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .timeline::after { left: 30px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 20px; }
+            .timeline-item::after { left: 23px; }
+            .right { left: 0; }
+            .right::after { left: 23px; }
+            .chat-box { width: 90%; right: 5%; bottom: 90px; }
+        }
+        
+        /* --- REVEAL ANIMATION --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo gold-text">ZY.</div>
+        <nav>
+            <ul>
+                <li><a href="#home" data-key="nav_home">Home</a></li>
+                <li><a href="#about" data-key="nav_about">About</a></li>
+                <li><a href="#experience" data-key="nav_exp">Experience</a></li>
+                <li><a href="#skills" data-key="nav_skills">Skills</a></li>
+                <li><a href="#projects" data-key="nav_projects">Projects</a></li>
+            </ul>
+        </nav>
+        <div class="controls">
+            <select id="lang-select" onchange="changeLanguage()">
+                <option value="en">EN</option>
+                <option value="es">ES</option>
+                <option value="ur">UR</option>
+            </select>
+            <button onclick="toggleTheme()" id="theme-btn"><i class="fas fa-sun"></i></button>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-content reveal">
+            <h1>Zeeshan <span class="gold-text">Younas</span></h1>
+            <p class="subtitle" data-key="hero_sub1">AI Engineer | LLM Applications</p>
+            <p class="subtitle"><span class="typing-text" id="typing-text"></span></p>
+            <div class="hero-btns">
+                <a href="#projects" class="btn btn-primary" data-key="hero_btn1">View Projects</a>
+                <a href="mailto:zeeshanyounas443@gmail.com" class="btn btn-secondary" data-key="hero_btn2">Contact Me</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <h2 class="section-title reveal" data-key="about_title">About Me</h2>
+        <div class="about-grid">
+            <div class="about-text reveal">
+                <p data-key="about_p1">BS Data Science graduate from the University of Okara with over two years of experience in AI development and workflow automation.</p>
+                <p data-key="about_p2">Experienced in building AI assistants, RAG applications, and predictive models using Python, FastAPI, and LangGraph. Focused on developing practical solutions that simplify business processes and reduce manual work.</p>
+                <div class="about-stats">
+                    <div class="stat-box"><h3>2+</h3><p data-key="stat_years">Years Experience</p></div>
+                    <div class="stat-box"><h3>30+</h3><p data-key="stat_kaggle">Kaggle Notebooks</p></div>
+                    <div class="stat-box"><h3>70%</h3><p data-key="stat_eff">Efficiency Boost</p></div>
+                    <div class="stat-box"><h3>3.56</h3><p data-key="stat_cgpa">BS CGPA</p></div>
+                </div>
+            </div>
+            <div class="glass-card reveal" style="text-align: center; padding: 50px;">
+                <i class="fas fa-brain gold-text" style="font-size: 6rem; margin-bottom: 20px;"></i>
+                <h3 class="gold-text" data-key="about_card_title">Kaggle Datasets Grandmaster</h3>
+                <p style="color: var(--text-secondary);" data-key="about_card_desc">Published 30+ notebooks and datasets, recognized for excellence in data science and machine learning communities.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+        <h2 class="section-title reveal" data-key="exp_title">Professional Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item left reveal">
+                <div class="glass-card timeline-content">
+                    <h3 data-key="exp1_title">AI/ML Engineer</h3>
+                    <span class="date">Minhaj Solutions Limited | Jan 2026 - Present</span>
+                    <p data-key="exp1_desc">Developed tools to automate repetitive team workflows, reducing manual work by ~70%. Built predictive models for weekly sales demand forecasting, contributing to a ~10% reduction in inventory costs.</p>
+                </div>
+            </div>
+            <div class="timeline-item right reveal">
+                <div class="glass-card timeline-content">
+                    <h3 data-key="exp2_title">AI Automation Developer</h3>
+                    <span class="date">Efaida Technologies | Jul 2024 - Oct 2025</span>
+                    <p data-key="exp2_desc">Built conversational AI receptionists using RAG, LangChain, and FastAPI. Developed market analysis trading agents producing BUY/SELL/HOLD signals with risk management features.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <h2 class="section-title reveal" data-key="skills_title">Technical Arsenal</h2>
+        <div class="grid-3">
+            <div class="glass-card skill-category reveal">
+                <h3><i class="fas fa-robot"></i> <span data-key="skill_cat1">Generative AI & LLM</span></h3>
+                <div class="skill-tags">
+                    <span class="tag">RAG</span><span class="tag">LangChain</span><span class="tag">LangGraph</span>
+                    <span class="tag">OpenAI SDK</span><span class="tag">CrewAI</span><span class="tag">Python</span>
+                </div>
+            </div>
+            <div class="glass-card skill-category reveal">
+                <h3><i class="fas fa-server"></i> <span data-key="skill_cat2">Backend & Cloud</span></h3>
+                <div class="skill-tags">
+                    <span class="tag">FastAPI</span><span class="tag">Flask</span><span class="tag">Django</span>
+                    <span class="tag">Docker</span><span class="tag">AWS</span><span class="tag">Git</span>
+                </div>
+            </div>
+            <div class="glass-card skill-category reveal">
+                <h3><i class="fas fa-chart-line"></i> <span data-key="skill_cat3">Machine Learning & Data</span></h3>
+                <div class="skill-tags">
+                    <span class="tag">Scikit-learn</span><span class="tag">TensorFlow</span><span class="tag">NumPy</span>
+                    <span class="tag">Pandas</span><span class="tag">SQL</span><span class="tag">Matplotlib</span>
+                </div>
+            </div>
+            <div class="glass-card skill-category reveal">
+                <h3><i class="fas fa-cogs"></i> <span data-key="skill_cat4">Automation & Tools</span></h3>
+                <div class="skill-tags">
+                    <span class="tag">Make.com</span><span class="tag">Google Apps Script</span><span class="tag">React/Vite</span>
+                    <span class="tag">Jupyter</span><span class="tag">Basic C++</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <h2 class="section-title reveal" data-key="proj_title">Featured Projects</h2>
+        <div class="grid-3">
+            <div class="glass-card project-card reveal">
+                <h3 data-key="proj1_title">Clinic AI Receptionist Agent</h3>
+                <p data-key="proj1_desc">A conversational receptionist that retrieves doctor and clinic information through RAG to answer patient questions using clinic-specific data. Orchestrated multi-step workflows with LangGraph.</p>
+                <div class="project-tech">
+                    <span class="tag">Python</span><span class="tag">LangChain</span><span class="tag">FastAPI</span><span class="tag">RAG</span>
+                </div>
+            </div>
+            <div class="glass-card project-card reveal">
+                <h3 data-key="proj2_title">AI Trading Agent</h3>
+                <p data-key="proj2_desc">Market analysis assistant that processes live market data and produces timeframe-specific BUY, SELL, HOLD, and WAIT signals. Integrated risk management and confidence scores.</p>
+                <div class="project-tech">
+                    <span class="tag">Python</span><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">ML</span>
+                </div>
+            </div>
+            <div class="glass-card project-card reveal">
+                <h3 data-key="proj3_title">Email Automation Workflow</h3>
+                <p data-key="proj3_desc">Built an automation in Make.com to check incoming emails, save content/attachments in Google Drive organized by sender, and store unique IDs in Google Sheets via Apps Script.</p>
+                <div class="project-tech">
+                    <span class="tag">Make.com</span><span class="tag">Apps Script</span><span class="tag">Google Drive</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACHIEVEMENTS & EDUCATION -->
+    <section id="achievements">
+        <h2 class="section-title reveal" data-key="ach_title">Achievements & Education</h2>
+        <div class="grid-3">
+            <div class="glass-card reveal" style="text-align: center;">
+                <i class="fas fa-trophy gold-text" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                <h3 class="gold-text" data-key="ach1_title">Kaggle Grandmaster</h3>
+                <p data-key="ach1_desc">Published 30+ notebooks and datasets, achieving top-tier status in the global data science community.</p>
+            </div>
+            <div class="glass-card reveal" style="text-align: center;">
+                <i class="fas fa-medal gold-text" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                <h3 class="gold-text" data-key="ach2_title">lablab.ai Winner</h3>
+                <p data-key="ach2_desc">Built an award-winning AI solution in a highly competitive global hackathon environment.</p>
+            </div>
+            <div class="glass-card reveal" style="text-align: center;">
+                <i class="fas fa-graduation-cap gold-text" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                <h3 class="gold-text" data-key="edu_title">BS Data Science</h3>
+                <p data-key="edu_desc">University of Okara (2022-2026)<br>CGPA: 3.56 / 4.00</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/zeeshanyounas" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/zeeshanyounas" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.kaggle.com/zeeshanyounas" target="_blank"><i class="fab fa-kaggle"></i></a>
+            <a href="mailto:zeeshanyounas443@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p>&copy; 2026 Zeeshan Younas. <span data-key="footer_rights">Crafted with Precision.</span></p>
+    </footer>
+
+    <!-- CHATBOT -->
+    <div class="chat-toggle" onclick="toggleChat()"><i class="fas fa-comment-dots"></i></div>
+    <div class="chat-box" id="chat-box">
+        <div class="chat-header">
+            <span><i class="fas fa-robot"></i> Zeeshan's AI Assistant</span>
+            <span style="cursor: pointer;" onclick="toggleChat()"><i class="fas fa-times"></i></span>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <div class="msg bot" data-key="chat_welcome">Hello! I'm Zeeshan's AI assistant. Ask me about his skills, experience, or projects!</div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chat-input" placeholder="Type your question..." onkeypress="handleEnter(event)">
+            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        // --- THEME TOGGLE ---
+        function toggleTheme() {
+            const html = document.documentElement;
+            const btn = document.getElementById('theme-btn');
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                btn.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                btn.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+
+        // --- TYPING EFFECT ---
+        const texts = ["RAG & LLM Applications", "AI Workflow Automation", "Predictive Modeling", "Kaggle Grandmaster"];
+        let count = 0, index = 0, currentText = '', letter = '';
+        (function type() {
+            if (count === texts.length) count = 0;
+            currentText = texts[count];
+            letter = currentText.slice(0, ++index);
+            document.getElementById('typing-text').textContent = letter;
+            if (letter.length === currentText.length) {
+                count++; index = 0;
+                setTimeout(type, 2000);
+            } else {
+                setTimeout(type, 100);
+            }
+        })();
+
+        // --- SCROLL REVEAL ---
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => observer.observe(el));
+
+        // --- CHATBOT LOGIC ---
+        function toggleChat() {
+            const box = document.getElementById('chat-box');
+            box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
+        }
+        function handleEnter(e) { if (e.key === 'Enter') sendMessage(); }
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const body = document.getElementById('chat-body');
+            if (input.value.trim() === '') return;
+            
+            const userMsg = document.createElement('div');
+            userMsg.className = 'msg user';
+            userMsg.textContent = input.value;
+            body.appendChild(userMsg);
+            
+            const query = input.value.toLowerCase();
+            let response = "I'm not sure about that, but you can email Zeeshan at zeeshanyounas443@gmail.com!";
+            
+            if (query.includes('skill') || query.includes('tech')) response = "Zeeshan specializes in Generative AI (RAG, LangChain, LangGraph), Backend (FastAPI, Docker, AWS), and Machine Learning (TensorFlow, Scikit-learn).";
+            else if (query.includes('experience') || query.includes('work')) response = "He is currently an AI/ML Engineer at Minhaj Solutions and previously worked at Efaida Technologies building AI Receptionists and Trading Agents.";
+            else if (query.includes('project')) response = "His top projects include a Clinic AI Receptionist using RAG, an AI Trading Agent, and automated email workflows.";
+            else if (query.includes('kaggle') || query.includes('award')) response = "Zeeshan is a Kaggle Datasets Grandmaster with 30+ published notebooks, and a winner of the lablab.ai Hackathon!";
+            else if (query.includes('hello') || query.includes('hi')) response = "Hello! Welcome to Zeeshan's premium portfolio. How can I assist you today?";
+            else if (query.includes('contact') || query.includes('email')) response = "You can reach him at zeeshanyounas443@gmail.com or connect on LinkedIn and GitHub.";
+
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'msg bot';
+                botMsg.textContent = response;
+                body.appendChild(botMsg);
+                body.scrollTop = body.scrollHeight;
+            }, 800);
+            
+            input.value = '';
+            body.scrollTop = body.scrollHeight;
+        }
+
+        // --- MULTI-LANGUAGE (Simplified Dictionary) ---
+        const translations = {
+            en: { nav_home: "Home", nav_about: "About", nav_exp: "Experience", nav_skills: "Skills", nav_projects: "Projects", hero_sub1: "AI Engineer | LLM Applications", about_title: "About Me", exp_title: "Professional Experience", skills_title: "Technical Arsenal", proj_title: "Featured Projects", ach_title: "Achievements & Education", chat_welcome: "Hello! I'm Zeeshan's AI assistant. Ask me about his skills, experience, or projects!", footer_rights: "Crafted with Precision." },
+            es: { nav_home: "Inicio", nav_about: "Sobre Mí", nav_exp: "Experiencia", nav_skills: "Habilidades", nav_projects: "Proyectos", hero_sub1: "Ingeniero de IA | Aplicaciones LLM", about_title: "Sobre Mí", exp_title: "Experiencia Profesional", skills_title: "Arsenal Técnico", proj_title: "Proyectos Destacados", ach_title: "Logros y Educación", chat_welcome: "¡Hola! Soy el asistente de IA de Zeeshan. ¡Pregúntame sobre sus habilidades o proyectos!", footer_rights: "Creado con Precisión." },
+            ur: { nav_home: "ہوم", nav_about: "تعارف", nav_exp: "تجربہ", nav_skills: "مہارتیں", nav_projects: "پروجیکٹس", hero_sub1: "AI انجینئر | LLM ایپلیکیشنز", about_title: "میرے بارے میں", exp_title: "پیشہ ورانہ تجربہ", skills_title: "تکنیکی مہارتیں", proj_title: "خاص پروجیکٹس", ach_title: "کامیابیاں اور تعلیم", chat_welcome: "ہیلو! میں ذیشان کا AI اسسٹنٹ ہوں۔ اس کی مہارتوں یا پروجیکٹس کے بارے میں پوچھیں!", footer_rights: "محنت سے تیار کردہ۔" }
+        };
+        function changeLanguage() {
+            const lang = document.getElementById('lang-select').value;
+            document.body.style.direction = lang === 'ur' ? 'rtl' : 'ltr';
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
+            });
+        }
+    </script>
+</body>
+</html>
